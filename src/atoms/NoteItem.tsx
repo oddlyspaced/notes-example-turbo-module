@@ -54,6 +54,8 @@ const styles = StyleSheet.create({
 		fontSize: 16,
 		fontWeight: '600',
 		color: 'black',
+		textAlign: 'left',
+		width: '100%',
 	},
 	noteDate: {
 		marginTop: 8,

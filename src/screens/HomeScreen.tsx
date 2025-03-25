@@ -6,19 +6,13 @@ import {
 import { NoteItem } from '../atoms/NoteItem';
 import { useNavigation } from '@react-navigation/native';
 import { Plus } from 'react-native-feather';
-import { getRandomDate } from '../utils/utils';
+import { getRandomDate, INote } from '../utils/utils';
 
 import { RouteProp } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { TNavigationRouterProps } from '../../App';
-
-const PLACEHOLDERS = [
-	'How to make your personal brand stand out online',
-	'Beautiful weather app UI concepts we wish existed',
-	'10 excellent font pairing tools for designers',
-	'12 eye-catching mobile wallpaper',
-	'Spotify’s Reema Bhagat on product design, music, and the key to a happy career',
-];
+import { useGlobalNotes } from '../context/NotesContext';
+import { useMemo } from 'react';
 
 type TNavigationProps = StackNavigationProp<
 	TNavigationRouterProps,
@@ -32,20 +26,27 @@ interface IProps {
 }
 
 export const HomeScreen = ({ navigation }: IProps) => {
-	const renderItem = ({ index, item }: { item: string; index: number }) => (
-		<NoteItem
-			index={index}
-			title={item}
-			date={getRandomDate()}
-			onPress={() => {
-				navigation.push('NotesScreen', {});
-				// NativeSpotlight?.indexItem("hl", 'wow item test', 'this is an item')
-				// NativeSpotlight?.clearIndex();
-			}}
-		/>
-	);
+	const renderItem = ({ index, item }: { item: INote; index: number }) => {
+		return (
+			<NoteItem
+				index={index}
+				title={item?.title}
+				date={getRandomDate()}
+				onPress={() => {
+					navigation.push('NotesScreen', {
+						id: item?.id,
+					});
+					// NativeSpotlight?.indexItem("hl", 'wow item test', 'this is an item')
+					// NativeSpotlight?.clearIndex();
+				}}
+			/>
+		);
+	};
 
 	const { bottom } = useSafeAreaInsets();
+
+	const { notes } = useGlobalNotes();
+	const notesItems = useMemo(() => Object.values(notes), [notes]);
 
 	return (
 		<SafeAreaView style={styles.container}>
@@ -67,7 +68,7 @@ export const HomeScreen = ({ navigation }: IProps) => {
 				/>
 			</View>
 			<FlatList
-				data={PLACEHOLDERS}
+				data={notesItems}
 				renderItem={renderItem}
 				keyExtractor={(_, index) => index.toString()}
 				numColumns={2}

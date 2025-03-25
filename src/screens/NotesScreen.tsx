@@ -12,6 +12,7 @@ import { ChevronLeft, Edit } from 'react-native-feather';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { TNavigationRouterProps } from '../../App';
 import { RouteProp } from '@react-navigation/native';
+import { useGlobalNotes } from '../context/NotesContext';
 
 type TNavigationProps = StackNavigationProp<
 	TNavigationRouterProps,
@@ -24,13 +25,12 @@ interface IProps {
 	route: TRouteProps;
 }
 
-export const NotesScreen = ({ navigation }: IProps) => {
-	const [isEditing, setIsEditing] = useState(false);
-	const [noteText, setNoteText] = useState(
-		`Who would have thought there could be so many creative ways to tell the temperature? Today’s daily dose of design inspiration is all about the weather. In this collection of UI designs, we’re sharing a handful of beautiful mobile weather app concepts that we wish existed in real life.
+export const NotesScreen = ({ navigation, route }: IProps) => {
+	const { id: noteId } = route?.params;
+	const { getNote, updateNote } = useGlobalNotes();
 
-Weather apps are quite the popular interface theme for designers to explore. But don’t let these effortlessly clean designs fool you. When it comes to the weather, there’s a lot of data designers have to arrange which can be quite a challenge. Regardless, it’s a great way to practice your UI skills.`,
-	);
+	const [isEditing, setIsEditing] = useState(false);
+	const [note, setNote] = useState(getNote(noteId));
 
 	return (
 		<SafeAreaView style={styles.container}>
@@ -38,6 +38,7 @@ Weather apps are quite the popular interface theme for designers to explore. But
 				<View style={styles.header}>
 					<TouchableOpacity
 						onPress={() => {
+							updateNote(note.id, note);
 							navigation.goBack();
 						}}
 						style={{
@@ -69,14 +70,25 @@ Weather apps are quite the popular interface theme for designers to explore. But
 					editable={isEditing}
 					multiline
 					style={styles.title}
-					value={'Beautiful weather app UI concepts we wish existed'}
+					value={note?.title}
+					onChangeText={(newText) => {
+						setNote((prev) => ({
+							...prev,
+							title: newText,
+						}));
+					}}
 				/>
 				<Text style={styles.date}>May 21, 2020</Text>
 				<TextInput
 					style={styles.textInput}
 					editable={isEditing}
-					value={noteText}
-					onChangeText={setNoteText}
+					value={note?.content}
+					onChangeText={(newText) => {
+						setNote((prev) => ({
+							...prev,
+							content: newText,
+						}));
+					}}
 					multiline
 				/>
 			</ScrollView>

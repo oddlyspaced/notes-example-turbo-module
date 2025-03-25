@@ -2,10 +2,13 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { HomeScreen } from './src/screens/HomeScreen';
 import { NavigationContainer } from '@react-navigation/native';
 import { NotesScreen } from './src/screens/NotesScreen';
+import { GlobalNotesProvider } from './src/context/NotesContext';
 
 export type TNavigationRouterProps = {
 	HomeScreen: {};
-	NotesScreen: {};
+	NotesScreen: {
+		id: number;
+	};
 };
 
 const AppNavigator = createNativeStackNavigator<TNavigationRouterProps>();
@@ -33,9 +36,11 @@ const Router = () => {
 
 const App = () => {
 	return (
-		<NavigationContainer>
-			<Router />;
-		</NavigationContainer>
+		<GlobalNotesProvider>
+			<NavigationContainer>
+				<Router />;
+			</NavigationContainer>
+		</GlobalNotesProvider>
 	);
 };
 
