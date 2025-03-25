@@ -10,7 +10,7 @@ const AppNavigator = createNativeStackNavigator<TNavigationRouterProps>();
 
 const Router = () => {
 	return (
-		<AppNavigator.Navigator initialRouteName={'HomeScreen'}>
+		<AppNavigator.Navigator>
 			<AppNavigator.Screen
 				name={'HomeScreen'}
 				component={HomeScreen}
