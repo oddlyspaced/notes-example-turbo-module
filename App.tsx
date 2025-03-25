@@ -1,17 +1,33 @@
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {Home} from './src/Home';
-import {createStaticNavigation} from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { HomeScreen } from './src/screens/HomeScreen';
+import { NavigationContainer } from '@react-navigation/native';
 
-const RootStack = createNativeStackNavigator({
-  screens: {
-    Home: Home,
-  },
-});
+type TNavigationRouterProps = {
+	HomeScreen: {};
+};
 
-const Navigation = createStaticNavigation(RootStack);
+const AppNavigator = createNativeStackNavigator<TNavigationRouterProps>();
+
+const Router = () => {
+	return (
+		<AppNavigator.Navigator initialRouteName={'HomeScreen'}>
+			<AppNavigator.Screen
+				name={'HomeScreen'}
+				component={HomeScreen}
+				options={{
+					headerShown: false,
+				}}
+			/>
+		</AppNavigator.Navigator>
+	);
+};
 
 const App = () => {
-  return <Navigation />;
+	return (
+		<NavigationContainer>
+			<Router />;
+		</NavigationContainer>
+	);
 };
 
 export default App;
