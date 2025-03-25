@@ -41,26 +41,12 @@ export const NotesScreen = ({ navigation, route }: IProps) => {
 							updateNote(note.id, note);
 							navigation.goBack();
 						}}
-						style={{
-							backgroundColor: '#3B3B3B',
-							alignItems: 'center',
-							justifyContent: 'center',
-							width: 48,
-							height: 48,
-							borderRadius: 12,
-						}}
+						style={styles.iconButton}
 					>
 						<ChevronLeft height={18} width={18} color={'white'} />
 					</TouchableOpacity>
 					<TouchableOpacity
-						style={{
-							backgroundColor: '#3B3B3B',
-							alignItems: 'center',
-							justifyContent: 'center',
-							width: 48,
-							height: 48,
-							borderRadius: 12,
-						}}
+						style={styles.iconButton}
 						onPress={() => setIsEditing((prev) => !prev)}
 					>
 						<Edit color={'white'} height={18} width={18} />
@@ -108,13 +94,13 @@ const styles = StyleSheet.create({
 		justifyContent: 'space-between',
 		marginBottom: 16,
 	},
-	backButton: {
-		fontSize: 24,
-		color: 'white',
-	},
-	editButton: {
-		fontSize: 16,
-		color: '#0A84FF',
+	iconButton: {
+		backgroundColor: '#3B3B3B',
+		alignItems: 'center',
+		justifyContent: 'center',
+		width: 48,
+		height: 48,
+		borderRadius: 12,
 	},
 	title: {
 		fontSize: 24,
@@ -127,11 +113,6 @@ const styles = StyleSheet.create({
 		color: '#888',
 		marginBottom: 16,
 		marginTop: 16,
-	},
-	noteText: {
-		fontSize: 16,
-		color: 'white',
-		lineHeight: 24,
 	},
 	textInput: {
 		fontSize: 16,

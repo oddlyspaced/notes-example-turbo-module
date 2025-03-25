@@ -4,9 +4,8 @@ import {
 	useSafeAreaInsets,
 } from 'react-native-safe-area-context';
 import { NoteItem } from '../atoms/NoteItem';
-import { useNavigation } from '@react-navigation/native';
 import { Plus } from 'react-native-feather';
-import { getRandomDate, INote } from '../utils/utils';
+import { INote } from '../utils/utils';
 
 import { RouteProp } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
@@ -31,13 +30,11 @@ export const HomeScreen = ({ navigation }: IProps) => {
 			<NoteItem
 				index={index}
 				title={item?.title}
-				date={getRandomDate()}
+				date={item?.date}
 				onPress={() => {
 					navigation.push('NotesScreen', {
 						id: item?.id,
 					});
-					// NativeSpotlight?.indexItem("hl", 'wow item test', 'this is an item')
-					// NativeSpotlight?.clearIndex();
 				}}
 			/>
 		);
