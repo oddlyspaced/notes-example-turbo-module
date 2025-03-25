@@ -1,6 +1,7 @@
 import { FlatList, Image, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { NoteItem } from '../atoms/NoteItem';
+import { useNavigation } from '@react-navigation/native';
 
 const PLACEHOLDERS = [
 	'How to make your personal brand stand out online',
@@ -12,8 +13,17 @@ const PLACEHOLDERS = [
 ];
 
 export const HomeScreen = () => {
+	const navigation = useNavigation();
+
 	const renderItem = ({ index, item }: { item: string; index: number }) => (
-		<NoteItem index={index} title={item} date='May 22, 2025' />
+		<NoteItem
+			index={index}
+			title={item}
+			date='May 22, 2025'
+			onPress={() => {
+				navigation.navigate('NotesScreen');
+			}}
+		/>
 	);
 
 	return (

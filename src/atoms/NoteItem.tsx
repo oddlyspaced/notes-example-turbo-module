@@ -1,9 +1,17 @@
-import { StyleProp, StyleSheet, Text, View, ViewStyle } from 'react-native';
+import {
+	Pressable,
+	StyleProp,
+	StyleSheet,
+	Text,
+	View,
+	ViewStyle,
+} from 'react-native';
 
 interface INoteItemProps {
 	index: number;
 	title: string;
 	date: string;
+	onPress?: () => void;
 }
 
 const NOTE_COLORS = [
@@ -15,9 +23,10 @@ const NOTE_COLORS = [
 	'#B6FFD4',
 ];
 
-export const NoteItem = ({ index, title, date }: INoteItemProps) => {
+export const NoteItem = ({ index, title, date, onPress }: INoteItemProps) => {
 	return (
-		<View
+		<Pressable
+			onPress={onPress}
 			style={[
 				styles.item,
 				{ backgroundColor: NOTE_COLORS[index % NOTE_COLORS.length] },
@@ -27,7 +36,7 @@ export const NoteItem = ({ index, title, date }: INoteItemProps) => {
 				{title}
 			</Text>
 			<Text style={styles.noteDate}>{date}</Text>
-		</View>
+		</Pressable>
 	);
 };
 
