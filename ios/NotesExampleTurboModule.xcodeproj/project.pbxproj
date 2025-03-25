@@ -10,6 +10,8 @@
 		0C80B921A6F3F58F76C31292 /* libPods-NotesExampleTurboModule.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DCACB8F33CDC322A6C60F78 /* libPods-NotesExampleTurboModule.a */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		1C77374D02F3160F8855110E /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */; };
+		560FC87D2D930C5300B4D13C /* NativeSpotlight.mm in Sources */ = {isa = PBXBuildFile; fileRef = 560FC87C2D930C5300B4D13C /* NativeSpotlight.mm */; };
+		560FC87F2D930CB100B4D13C /* NativeSpotlightImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560FC87E2D930CB100B4D13C /* NativeSpotlightImpl.swift */; };
 		761780ED2CA45674006654EE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761780EC2CA45674006654EE /* AppDelegate.swift */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
@@ -20,6 +22,10 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = NotesExampleTurboModule/Info.plist; sourceTree = "<group>"; };
 		13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = PrivacyInfo.xcprivacy; path = NotesExampleTurboModule/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		3B4392A12AC88292D35C810B /* Pods-NotesExampleTurboModule.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NotesExampleTurboModule.debug.xcconfig"; path = "Target Support Files/Pods-NotesExampleTurboModule/Pods-NotesExampleTurboModule.debug.xcconfig"; sourceTree = "<group>"; };
+		560FC87A2D930C5200B4D13C /* NotesExampleTurboModule-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NotesExampleTurboModule-Bridging-Header.h"; sourceTree = "<group>"; };
+		560FC87B2D930C5300B4D13C /* NativeSpotlight.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NativeSpotlight.h; sourceTree = "<group>"; };
+		560FC87C2D930C5300B4D13C /* NativeSpotlight.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NativeSpotlight.mm; sourceTree = "<group>"; };
+		560FC87E2D930CB100B4D13C /* NativeSpotlightImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeSpotlightImpl.swift; sourceTree = "<group>"; };
 		5709B34CF0A7D63546082F79 /* Pods-NotesExampleTurboModule.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NotesExampleTurboModule.release.xcconfig"; path = "Target Support Files/Pods-NotesExampleTurboModule/Pods-NotesExampleTurboModule.release.xcconfig"; sourceTree = "<group>"; };
 		5DCACB8F33CDC322A6C60F78 /* libPods-NotesExampleTurboModule.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-NotesExampleTurboModule.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		761780EC2CA45674006654EE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = NotesExampleTurboModule/AppDelegate.swift; sourceTree = "<group>"; };
@@ -60,6 +66,17 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		560FC8792D930C2200B4D13C /* NativeSpotlight */ = {
+			isa = PBXGroup;
+			children = (
+				560FC87B2D930C5300B4D13C /* NativeSpotlight.h */,
+				560FC87C2D930C5300B4D13C /* NativeSpotlight.mm */,
+				560FC87A2D930C5200B4D13C /* NotesExampleTurboModule-Bridging-Header.h */,
+				560FC87E2D930CB100B4D13C /* NativeSpotlightImpl.swift */,
+			);
+			path = NativeSpotlight;
+			sourceTree = "<group>";
+		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
@@ -70,6 +87,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				560FC8792D930C2200B4D13C /* NativeSpotlight */,
 				13B07FAE1A68108700A75B9A /* NotesExampleTurboModule */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				83CBBA001A601CBA00E9B192 /* Products */,
@@ -131,7 +149,7 @@
 				LastUpgradeCheck = 1210;
 				TargetAttributes = {
 					13B07F861A680F5B00A75B9A = {
-						LastSwiftMigration = 1120;
+						LastSwiftMigration = 1620;
 					};
 				};
 			};
@@ -247,6 +265,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				761780ED2CA45674006654EE /* AppDelegate.swift in Sources */,
+				560FC87F2D930CB100B4D13C /* NativeSpotlightImpl.swift in Sources */,
+				560FC87D2D930C5300B4D13C /* NativeSpotlight.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -275,6 +295,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = NotesExampleTurboModule;
+				SWIFT_OBJC_BRIDGING_HEADER = "NativeSpotlight/NotesExampleTurboModule-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -302,6 +323,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = NotesExampleTurboModule;
+				SWIFT_OBJC_BRIDGING_HEADER = "NativeSpotlight/NotesExampleTurboModule-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};

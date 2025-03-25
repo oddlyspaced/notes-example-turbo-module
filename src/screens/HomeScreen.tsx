@@ -2,6 +2,7 @@ import { FlatList, Image, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { NoteItem } from '../atoms/NoteItem';
 import { useNavigation } from '@react-navigation/native';
+import NativeSpotlight from '../../specs/NativeSpotlight';
 
 const PLACEHOLDERS = [
 	'How to make your personal brand stand out online',
@@ -21,7 +22,9 @@ export const HomeScreen = () => {
 			title={item}
 			date='May 22, 2025'
 			onPress={() => {
-				navigation.navigate('NotesScreen');
+				// navigation.navigate('NotesScreen');
+				// NativeSpotlight?.indexItem("hl", 'wow item test', 'this is an item')
+				// NativeSpotlight?.clearIndex();
 			}}
 		/>
 	);
