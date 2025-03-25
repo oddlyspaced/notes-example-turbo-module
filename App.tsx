@@ -1,9 +1,9 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { HomeScreen } from './src/screens/HomeScreen';
 import { NavigationContainer } from '@react-navigation/native';
-import { NoteScreen } from './src/screens/NotesScreen';
+import { NotesScreen } from './src/screens/NotesScreen';
 
-type TNavigationRouterProps = {
+export type TNavigationRouterProps = {
 	HomeScreen: {};
 	NotesScreen: {};
 };
@@ -22,7 +22,7 @@ const Router = () => {
 			/>
 			<AppNavigator.Screen
 				name={'NotesScreen'}
-				component={NoteScreen}
+				component={NotesScreen}
 				options={{
 					headerShown: false,
 				}}

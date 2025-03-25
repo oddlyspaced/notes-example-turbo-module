@@ -1,3 +1,4 @@
+import { StackNavigationProp } from '@react-navigation/stack';
 import React, { useState } from 'react';
 import {
 	Text,
@@ -7,9 +8,23 @@ import {
 	StyleSheet,
 	ScrollView,
 } from 'react-native';
+import { ChevronLeft, Edit } from 'react-native-feather';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { TNavigationRouterProps } from '../../App';
+import { RouteProp } from '@react-navigation/native';
 
-export const NoteScreen = () => {
+type TNavigationProps = StackNavigationProp<
+	TNavigationRouterProps,
+	'NotesScreen'
+>;
+type TRouteProps = RouteProp<TNavigationRouterProps, 'NotesScreen'>;
+
+interface IProps {
+	navigation: TNavigationProps;
+	route: TRouteProps;
+}
+
+export const NotesScreen = ({ navigation }: IProps) => {
 	const [isEditing, setIsEditing] = useState(false);
 	const [noteText, setNoteText] = useState(
 		`Who would have thought there could be so many creative ways to tell the temperature? Today’s daily dose of design inspiration is all about the weather. In this collection of UI designs, we’re sharing a handful of beautiful mobile weather app concepts that we wish existed in real life.
@@ -21,20 +36,41 @@ Weather apps are quite the popular interface theme for designers to explore. But
 		<SafeAreaView style={styles.container}>
 			<ScrollView>
 				<View style={styles.header}>
-					<TouchableOpacity>
-						<Text style={styles.backButton}>←</Text>
+					<TouchableOpacity
+						onPress={() => {
+							navigation.goBack();
+						}}
+						style={{
+							backgroundColor: '#3B3B3B',
+							alignItems: 'center',
+							justifyContent: 'center',
+							width: 48,
+							height: 48,
+							borderRadius: 12,
+						}}
+					>
+						<ChevronLeft height={18} width={18} color={'white'} />
 					</TouchableOpacity>
 					<TouchableOpacity
+						style={{
+							backgroundColor: '#3B3B3B',
+							alignItems: 'center',
+							justifyContent: 'center',
+							width: 48,
+							height: 48,
+							borderRadius: 12,
+						}}
 						onPress={() => setIsEditing((prev) => !prev)}
 					>
-						<Text style={styles.editButton}>
-							{isEditing ? 'Done' : 'Edit'}
-						</Text>
+						<Edit color={'white'} height={18} width={18} />
 					</TouchableOpacity>
 				</View>
-				<Text style={styles.title}>
-					Beautiful weather app UI concepts we wish existed
-				</Text>
+				<TextInput
+					editable={isEditing}
+					multiline
+					style={styles.title}
+					value={'Beautiful weather app UI concepts we wish existed'}
+				/>
 				<Text style={styles.date}>May 21, 2020</Text>
 				<TextInput
 					style={styles.textInput}
@@ -52,7 +88,8 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		backgroundColor: '#252525',
-		padding: 16,
+		paddingVertical: 16,
+		paddingHorizontal: 24,
 	},
 	header: {
 		flexDirection: 'row',
@@ -69,14 +106,15 @@ const styles = StyleSheet.create({
 	},
 	title: {
 		fontSize: 24,
-		fontWeight: 'bold',
+		lineHeight: 36,
+		fontWeight: '800',
 		color: 'white',
-		marginBottom: 8,
 	},
 	date: {
 		fontSize: 14,
 		color: '#888',
 		marginBottom: 16,
+		marginTop: 16,
 	},
 	noteText: {
 		fontSize: 16,
@@ -87,9 +125,11 @@ const styles = StyleSheet.create({
 		fontSize: 16,
 		color: 'white',
 		lineHeight: 24,
+		fontWeight: '400',
 		backgroundColor: '#333',
 		borderRadius: 8,
 		padding: 12,
 		textAlignVertical: 'top',
+		paddingBottom: 18,
 	},
 });
