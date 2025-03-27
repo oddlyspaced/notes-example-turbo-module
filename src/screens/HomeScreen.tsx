@@ -1,4 +1,11 @@
-import { FlatList, Image, StyleSheet, Text, View } from 'react-native';
+import {
+	FlatList,
+	Image,
+	Pressable,
+	StyleSheet,
+	Text,
+	View,
+} from 'react-native';
 import {
 	SafeAreaView,
 	useSafeAreaInsets,
@@ -12,6 +19,7 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import { TNavigationRouterProps } from '../../App';
 import { useGlobalNotes } from '../context/NotesContext';
 import { useMemo } from 'react';
+import NativeSpotlight from '../../specs/NativeSpotlight';
 
 type TNavigationProps = StackNavigationProp<
 	TNavigationRouterProps,
@@ -47,7 +55,10 @@ export const HomeScreen = ({ navigation }: IProps) => {
 
 	return (
 		<SafeAreaView style={styles.container}>
-			<View
+			<Pressable
+				onPress={() => {
+					NativeSpotlight?.clearIndex();
+				}}
 				style={[
 					{
 						bottom: bottom + 24,
@@ -56,7 +67,7 @@ export const HomeScreen = ({ navigation }: IProps) => {
 				]}
 			>
 				<Plus color={'white'} />
-			</View>
+			</Pressable>
 			<View style={styles.header}>
 				<Text style={styles.headerText}>Notes</Text>
 				<Image
