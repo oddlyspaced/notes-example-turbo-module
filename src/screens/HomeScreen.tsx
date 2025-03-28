@@ -18,7 +18,7 @@ import { RouteProp } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { TNavigationRouterProps } from '../../App';
 import { useGlobalNotes } from '../context/NotesContext';
-import { useMemo } from 'react';
+import { useCallback, useMemo } from 'react';
 import NativeSpotlight from '../../specs/NativeSpotlight';
 
 type TNavigationProps = StackNavigationProp<
@@ -48,6 +48,10 @@ export const HomeScreen = ({ navigation }: IProps) => {
 		);
 	};
 
+	const clearIndex = useCallback(() => {
+		NativeSpotlight?.clearIndex();
+	}, []);
+
 	const { bottom } = useSafeAreaInsets();
 
 	const { notes } = useGlobalNotes();
@@ -56,9 +60,7 @@ export const HomeScreen = ({ navigation }: IProps) => {
 	return (
 		<SafeAreaView style={styles.container}>
 			<Pressable
-				onPress={() => {
-					NativeSpotlight?.clearIndex();
-				}}
+				onPress={clearIndex}
 				style={[
 					{
 						bottom: bottom + 24,
